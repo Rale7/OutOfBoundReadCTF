@@ -1,0 +1,58 @@
+# Server C++ .gitignore
+
+# Build outputs
+out/
+build/
+cmake-build-debug/
+cmake-build-release/
+
+# Object files
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Dependency files
+*.d
+*.deps
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile.user
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local

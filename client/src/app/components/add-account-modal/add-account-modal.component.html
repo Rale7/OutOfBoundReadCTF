@@ -1,0 +1,50 @@
+<div class="modal-backdrop" (click)="onBackdropClick($event)">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Dodaj novi nalog</h2>
+      <button class="close-button" (click)="close.emit()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div *ngIf="validationErrors.length > 0" class="error-messages">
+        <div *ngFor="let error of validationErrors" class="error-item">
+          <i class="fas fa-exclamation-circle"></i> {{ error }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Servis *</label>
+        <input
+          type="text"
+          [(ngModel)]="newAccount.service"
+          placeholder="npr. Gmail, GitHub, Facebook..."
+          class="form-input"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Korisničko ime *</label>
+        <input
+          type="text"
+          [(ngModel)]="newAccount.username"
+          placeholder="Unesite korisničko ime"
+          class="form-input"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Lozinka *</label>
+        <input
+          type="password"
+          [(ngModel)]="newAccount.password"
+          placeholder="Unesite lozinku"
+          class="form-input"
+        />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button (click)="addAccount()" class="save-button">Dodaj nalog</button>
+      <button (click)="close.emit()" class="cancel-button">Otkaži</button>
+    </div>
+  </div>
+</div>

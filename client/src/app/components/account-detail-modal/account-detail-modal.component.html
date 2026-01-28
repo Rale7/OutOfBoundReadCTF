@@ -1,0 +1,71 @@
+<div class="modal-backdrop" (click)="onBackdropClick($event)">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>{{ isEditing ? 'Izmeni nalog' : 'Detalji naloga' }}</h2>
+      <button class="close-button" (click)="close.emit()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="modal-body">
+      <div *ngIf="!isEditing" class="view-mode">
+        <div class="detail-group">
+          <label>Servis:</label>
+          <p class="detail-value">{{ account.service }}</p>
+        </div>
+
+        <div class="detail-group">
+          <label>Korisničko ime:</label>
+          <div class="detail-value-with-copy">
+            <p class="detail-value">{{ account.username }}</p>
+            <button (click)="copyToClipboard(account.username)" class="copy-button" title="Kopiraj"><i class="fas fa-copy"></i></button>
+          </div>
+        </div>
+
+        <div class="detail-group">
+          <label>Lozinka:</label>
+          <div class="detail-value-with-copy">
+            <p class="detail-value">{{ showPassword ? account.password : '••••••••' }}</p>
+            <button (click)="togglePasswordVisibility()" class="toggle-button" title="Prikaži/Sakrij">
+              <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            </button>
+            <button (click)="copyToClipboard(account.password)" class="copy-button" title="Kopiraj"><i class="fas fa-copy"></i></button>
+          </div>
+        </div>
+
+        
+      </div>
+
+      <div *ngIf="isEditing" class="edit-mode">
+        <div class="form-group">
+          <label>Servis:</label>
+          <input type="text" [(ngModel)]="editedAccount.service" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label>Korisničko ime:</label>
+          <input type="text" [(ngModel)]="editedAccount.username" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label>Lozinka:</label>
+          <input type="password" [(ngModel)]="editedAccount.password" class="form-input" />
+        </div>
+
+        
+
+        
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <div *ngIf="!isEditing && !showConfirmDelete" class="footer-buttons">
+        <button (click)="toggleEdit()" class="edit-button">Izmeni</button>
+        <button (click)="close.emit()" class="close-modal-button">Zatvori</button>
+      </div>
+
+      <div *ngIf="isEditing" class="footer-buttons">
+        <button (click)="saveChanges()" class="save-button">Sačuvaj</button>
+        <button (click)="toggleEdit()" class="cancel-button">Otkaži</button>
+      </div>
+    </div>
+  </div>
+</div>

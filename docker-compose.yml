@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # C++ Server
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: cpp-server
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # Angular Client
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: angular-client
+    ports:
+      - "4200:4200"
+    networks:
+      - app-network
+    depends_on:
+      - server
+    restart: unless-stopped
+    volumes:
+      # Mount source code for development (optional - remove in production)
+      - ./client/src:/app/src
+      - /app/node_modules
+
+networks:
+  app-network:
+    driver: bridge

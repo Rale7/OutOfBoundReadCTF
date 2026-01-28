@@ -1,0 +1,17 @@
+# Ignore build outputs
+out/
+*.o
+*.d
+
+# Ignore version control
+.git
+.gitignore
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore documentation
+README.md
