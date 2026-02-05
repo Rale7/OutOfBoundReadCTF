@@ -45,7 +45,6 @@ std::string Level1Service::exportFromFile(size_t size) {
 }
 
 void Level1Service::importToFile(const char data[], size_t size) {
-  // Base implementation - do nothing
-  (void)data;  // Suppress unused parameter warning
-  (void)size;  // Suppress unused parameter warning
+  (void)data;
+  (void)size;
 }

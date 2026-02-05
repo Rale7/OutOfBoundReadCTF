@@ -14,11 +14,9 @@ struct AuthCredentials {
 
 class AuthParser {
  public:
-  // Parse Basic Auth from request headers
   static AuthCredentials parseBasicAuth(const HttpRequest& request);
 
  private:
-  // Decode Base64 string
   static std::string decodeBase64(const std::string& encoded);
 };
 

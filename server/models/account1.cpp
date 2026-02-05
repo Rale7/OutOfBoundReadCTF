@@ -12,7 +12,6 @@ Account1::Account1(const char* svc, const char* user, const char* pass,
 }
 
 std::string Account1::serialize() const {
-  // Naivna serijalizacija u JSON bez escaping-a
   std::string json = "{";
   json += "\"service\":\"";
   json.append(service);
@@ -28,7 +27,6 @@ std::string Account1::serialize() const {
 }
 
 void Account1::deserialize(const std::string& data) {
-  // Naivna deserializacija (bez validacije JSON-a i escaping-a)
   std::string s = extractJsonStringValue(data, "service");
   std::string u = extractJsonStringValue(data, "username");
   std::string p = extractJsonStringValue(data, "password");

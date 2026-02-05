@@ -8,11 +8,8 @@
 
 class SafeExecutor {
  public:
-  // Execute a handler function safely, catching crashes and returning 500 on
-  // failure
   static std::string executeHandler(std::function<std::string()> handler);
 
-  // Generate a 500 Internal Server Error response
   static std::string generate500Response(
       const std::string& error_message = "Internal Server Error");
 

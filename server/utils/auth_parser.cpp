@@ -4,7 +4,6 @@
 #include <iostream>
 
 namespace {
-// Simple Base64 decoder (only for decoding, not encoding)
 const std::string BASE64_CHARS =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
@@ -40,7 +39,6 @@ std::string decodeBase64Internal(const std::string& encoded) {
 AuthCredentials AuthParser::parseBasicAuth(const HttpRequest& request) {
   AuthCredentials creds{"", "", false};
 
-  // Find Authorization header
   auto it = request.headers.find("Authorization");
   if (it == request.headers.end()) {
     return creds;  // No auth header
@@ -48,19 +46,15 @@ AuthCredentials AuthParser::parseBasicAuth(const HttpRequest& request) {
 
   std::string auth_header = it->second;
 
-  // Check for "Basic " prefix
   if (auth_header.substr(0, 6) != "Basic ") {
-    return creds;  // Not Basic auth
+    return creds;
   }
 
-  // Extract Base64 part
   std::string encoded = auth_header.substr(6);
-  // Decode Base64
   std::string decoded = decodeBase64(encoded);
-  // Split by ':'
   size_t colon_pos = decoded.find(':');
   if (colon_pos == std::string::npos) {
-    return creds;  // Invalid format
+    return creds;
   }
 
   creds.username = decoded.substr(0, colon_pos);

@@ -24,7 +24,6 @@ struct Account3 : public Serializable {
   std::string serialize() const override;
   void deserialize(const std::string& data) override;
 
-  // Custom allocator: fixed-size pool
   static void* operator new(std::size_t sz);
   static void operator delete(void* p) noexcept;
 

@@ -15,9 +15,9 @@ using RouteHandler = std::function<std::string(const HttpRequest&)>;
 class Router {
  private:
   struct RouteEntry {
-    std::string pattern;              // Original pattern e.g. /users/:id
-    std::regex regex;                 // Compiled regex e.g. ^/users/([^/]+)$
-    std::vector<std::string> params;  // ["id"]
+    std::string pattern;
+    std::regex regex;
+    std::vector<std::string> params;
     HttpRequestMethod method;
     RouteHandler handler;
   };
@@ -25,11 +25,9 @@ class Router {
   std::vector<RouteEntry> routes;
 
  public:
-  // Registriranje rute (pattern može sadržati ":param")
   void addRoute(const std::string& pattern, HttpRequestMethod method,
                 RouteHandler handler);
 
-  // Pronalaženje i izvršavanje rute
   std::string handleRequest(const HttpRequest& request);
 
  private:

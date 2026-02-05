@@ -5,7 +5,6 @@
 
 static typename std::aligned_storage<sizeof(Account3), alignof(Account3)>::type
     s_pool[POOL_SIZE];
-// Static storage definitions
 
 bool Account3::s_used[POOL_SIZE] = {false};
 
@@ -52,7 +51,6 @@ void Account3::deserialize(const std::string& data) {
 }
 
 void* Account3::operator new(std::size_t sz) {
-  // Try pool first
   if (sz == sizeof(Account3)) {
     for (std::size_t i = 0; i < POOL_SIZE; ++i) {
       if (!s_used[i]) {
@@ -61,7 +59,6 @@ void* Account3::operator new(std::size_t sz) {
       }
     }
   }
-  // Fallback to global operator new
   return ::operator new(sz);
 }
 
@@ -70,19 +67,16 @@ void Account3::operator delete(void* p) noexcept {
   strcpy(accountPtr->secret, "49VeKM4jE9kQS9ZgeZnRFBkTJsR84c");
 
   if (!p) return;
-  // Check if pointer belongs to our pool
   auto base = reinterpret_cast<std::uintptr_t>(&s_pool[0]);
   auto end = reinterpret_cast<std::uintptr_t>(&s_pool[POOL_SIZE]);
   auto addr = reinterpret_cast<std::uintptr_t>(p);
 
   if (addr >= base && addr < end) {
-    // Compute index
     std::size_t index = (addr - base) / sizeof(Account3);
     if (index < POOL_SIZE) {
       s_used[index] = false;
       return;
     }
   }
-  // Fallback to global delete
   ::operator delete(p);
 }

@@ -9,7 +9,6 @@ Account2::Account2(const char* svc, const char* user, const char* pass,
 }
 
 std::string Account2::serialize() const {
-  // Naivna serijalizacija u JSON bez escaping-a
   std::string json = "{";
   json += "\"service\":\"";
   if (username - service > 0) {

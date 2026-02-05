@@ -14,7 +14,6 @@ struct HttpRequest {
   HttpVersion version;
   std::unordered_map<std::string, std::string> headers;
   std::string body;
-  // Path parameters extracted by the router (e.g., from "/users/:id")
   std::unordered_map<std::string, std::string> params;
 };
 
